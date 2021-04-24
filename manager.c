@@ -8,6 +8,7 @@ int selectMenu(){
     printf("3. 수정\n");
     printf("4. 삭제\n");
     printf("5. 저장\n");
+    printf("6. 조회\n");
     printf("0. 종료\n\n");
     printf("=> 원하는 메뉴는? ");
     scanf("%d", &menu);
@@ -58,9 +59,21 @@ int loadData(Product *p){
 
 	//파일 내용을 읽어와서 배열에 값 추가하기
 
-
+	
+	fp = fopen("product.txt", "rt");
+        if (fp==NULL){
+                printf("=>파일없음\n");
+        }
+        else{
+                for (int i=0; i<100; i++){
+                        fscanf(fp, "%s", p[i].name);
+                        if (feof(fp)) break;
+                        fscanf(fp, "%d", &p[i].weight);
+                        fscanf(fp, "%d", &p[i].price);
+                }
 
 
 	printf("=> 로딩 성공!\n");
 	return count;
+}
 }
